@@ -14,6 +14,7 @@ public class ResultView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_view);
         Button gameButton= findViewById(R.id.gameButton);
+        Button startButton= findViewById(R.id.stButton);
         gameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(ResultView.this,GameView.class);
@@ -22,5 +23,13 @@ public class ResultView extends AppCompatActivity {
 
             }
     });
+        startButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ResultView.this,MainActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
     }
 }
