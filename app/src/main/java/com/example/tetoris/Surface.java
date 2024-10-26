@@ -9,10 +9,10 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-public class View extends SurfaceView implements SurfaceHolder.Callback {
+public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
 
-    public View(Context context) {
+    public Surface(Context context) {
         super(context);
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
