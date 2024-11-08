@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_game.xml -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_game">
+
+    <!-- スコア表示用のTextView -->
+
+    <!-- スコア表示用のTextView -->
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Score: 0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044" />
+
+    <TextView
+        android:id="@+id/levelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="LEVEL: 0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044" />
+
+    <TextView
+        android:id="@+id/comboTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Combo: 0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="416dp"
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scoreTextView"
+        app:layout_constraintVertical_bias="1.0">
+
+        <com.example.tetris.TetrisView
+            android:id="@+id/tetrisView"
+            android:layout_width="300dp"
+            android:layout_height="500dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.292"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.84" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 操作用ボタンのレイアウト -->
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="413dp"
+        android:layout_height="172dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.996">
+
+        <!-- 左右ボタンを含むLinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- 左移動ボタン -->
+            <Button
+                android:id="@+id/buttonLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left" />
+
+            <!-- 回転ボタン -->
+            <Button
+                android:id="@+id/buttonrightRotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rightRotate" />
+
+            <Button
+                android:id="@+id/buttonleftRotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="leftRotate" />
+
+            <!-- 右移動ボタン -->
+            <Button
+                android:id="@+id/buttonRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right" />
+        </LinearLayout>
+
+        <!-- Fast DropとHard Dropボタンを横並びにするLinearLayout -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="78dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- Holdボタン -->
+            <Button
+                android:id="@+id/HoldButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hold" />
+
+            <!-- Fast Dropボタン -->
+            <Button
+                android:id="@+id/fastDropButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fast Drop" />
+
+            <!-- Hard Dropボタン -->
+            <Button
+                android:id="@+id/hardDropButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Hard Drop" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
