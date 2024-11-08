@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- res/layout/activity_main.xml -->
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@drawable/kinnmirai">
+    android:layout_height="match_parent">
 
+    <!-- 画面全体をタップできるエリア -->
+    <FrameLayout
+        android:id="@+id/full_screen_touch_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/kinnmirai" /> <!-- 背景を設定 -->
+
+    <!-- TextViewをFrameLayoutの上に重ねる -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tetris Game"
         android:textSize="70sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="138dp"
-        android:layout_height="69dp"
-        android:text="Start Game"
-        android:background="@drawable/kinnmirai"/>
-
-</LinearLayout>
+        android:textStyle="bold"
+        android:layout_gravity="center" /> <!-- 中央に配置 -->
+</FrameLayout>
