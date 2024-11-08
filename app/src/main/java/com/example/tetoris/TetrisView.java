@@ -47,6 +47,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     private int nextlevel;
     //コンボ機能
     private int rencount;
+    private int maxcombo=0;
     //SRS
     private int shapenumber;
 
@@ -95,14 +96,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     public void generateNextTetrominoes() {
         while (nextTetrominoes.size() < NEXT_TETROMINOES_COUNT) {
             nextTetrominoes.add(new Tetromino());
-        }
-    }
-
-    public void checkNextTetrominoes() {
-        System.out.println("number: " + nextTetrominoes.size());
-        for (Tetromino tetromino : nextTetrominoes) {
-            System.out.println("color: " + tetromino.color);
-            // 必要に応じて形状などの情報も表示
         }
     }
 
@@ -572,7 +565,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         currentTetromino.y = 3;
         swapcount++;
 
-        if(swapcount>1) {
+        if(swapcount>0) {
             swapcount=0;
             hasSwapped = true; // 一度入れ替えたら次のテトリミノ生成まで禁止
         }
@@ -593,16 +586,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         clearFullRows(); // 行が揃っているか確認し削除
         currentTetromino = nextTetrominoes.poll();
         generateNextTetrominoes();
-        //checkNextTetrominoes();//次のミノが格納されているかの確認
         hasSwapped = false; // 新しいテトリミノ生成でholdminoのフラグリセット
         draw();
-    }
-
-    // ゲームオーバー処理の一部一時的にここに書いているだけ
-    private void gameOver() {
-        fallInterval = FALL_INTERVAL;
-        ((GameActivity) getContext()).showResultScreen(score); // GameActivityに通知してリザルト画面に遷移させる
-        ((GameActivity) getContext()).showResultScreenlevel(level);
     }
 
     //ミノが下に移動できるのかを判定
@@ -694,6 +679,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         if (rowsCleared > 0) {
 
             rencount++;
+            if(maxcombo<rencount){
+                maxcombo=rencount;
+            }
 
             if(rowsCleared == 1){
                 score += 40 + 40 * level;
@@ -725,6 +713,13 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    // ゲームオーバー処理
+    private void gameOver() {
+        fallInterval = FALL_INTERVAL;
+        Tetromino.clearBag();
+        ((GameActivity) getContext()).showResultScreen(score,level,maxcombo); // GameActivityに通知してリザルト画面に遷移させる
+    }
+
     // スコア更新メソッド（GameActivityから呼び出せるようにする）
     public int getScore() {
         return score;
@@ -735,7 +730,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public int getCombo() {
-        return rencount;
+        return maxcombo;
     }
 
     @Override

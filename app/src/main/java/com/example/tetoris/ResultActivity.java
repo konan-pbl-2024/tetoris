@@ -14,26 +14,22 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        // スコアを受け取る
+        // 表示する値を受け取る
         int score = getIntent().getIntExtra("SCORE", 0);
+        int level = getIntent().getIntExtra("Level", 0);
+        int maxcombo = getIntent().getIntExtra("MAXCOMBO", 0);
 
         // スコアを表示する処理を追加
         TextView scoreTextView = findViewById(R.id.scoreTextView);
         scoreTextView.setText("Score: " + score);
 
-        // レベルを受け取る
-        int Level = getIntent().getIntExtra("LEVEL", 0);
-
         // レベルを表示する処理を追加
         TextView LevelTextView = findViewById(R.id.LevelTextView);
-        LevelTextView.setText("Level: " + Level);
-
-        // 最大コンボを受け取る
-        //int maxcombo = getIntent().getIntExtra("MAXCOMBO", 0);
+        LevelTextView.setText("Level: " + level);
 
         // 最大コンボを表示する処理を追加
-        //TextView maxcomboTextView = findViewById(R.id.maxcomboTextView);
-        //LevelTextView.setText("MaxCombo: " + maxcombo);
+        TextView maxcomboTextView = findViewById(R.id.maxcomboTextView);
+        maxcomboTextView.setText("MaxCombo: " + maxcombo);
 
         // 再スタートボタンの設定
         Button restartButton = findViewById(R.id.restart_button);
