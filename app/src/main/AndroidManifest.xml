@@ -12,17 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tetoris"
         tools:targetApi="31">
-        <activity
-            android:name=".GameView"
-            android:exported="false" />
+
+        <!-- MainActivity の宣言 -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- GameActivity を追加 -->
+        <activity
+            android:name=".GameActivity"
+            android:exported="true">
+            <!-- 必要に応じてインテントフィルタを追加 -->
+        </activity>
+        <!-- GameActivity を追加 -->
+        <activity
+            android:name=".ResultActivity"
+            android:exported="true">
+            <!-- 必要に応じてインテントフィルタを追加 -->
         </activity>
     </application>
 

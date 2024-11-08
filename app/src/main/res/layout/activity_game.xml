@@ -6,8 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_game">
+    android:layout_height="match_parent">
 
     <!-- スコア表示用のTextView -->
 
@@ -68,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@id/scoreTextView"
         app:layout_constraintVertical_bias="1.0">
 
-        <com.example.tetris.TetrisView
+        <com.example.tetoris.TetrisView
             android:id="@+id/tetrisView"
             android:layout_width="300dp"
             android:layout_height="500dp"
