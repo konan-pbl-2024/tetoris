@@ -112,4 +112,8 @@ public class Tetromino {
         Collections.shuffle(bag);
     }
 
+    public static void clearBag(){
+        bag.clear();
+    }
+
 }
