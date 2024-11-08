@@ -602,6 +602,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     private void gameOver() {
         fallInterval = FALL_INTERVAL;
         ((GameActivity) getContext()).showResultScreen(score); // GameActivityに通知してリザルト画面に遷移させる
+        ((GameActivity) getContext()).showResultScreenlevel(level);
     }
 
     //ミノが下に移動できるのかを判定
