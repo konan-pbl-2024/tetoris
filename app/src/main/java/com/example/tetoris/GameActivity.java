@@ -162,4 +162,11 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showResultScreenlevel(int Level) { //tetrisviewの604行目あたりを変更？
+        // 結果画面へのインテントを作成し、スコアを渡す
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("LEVEL", Level);
+        startActivity(intent);
+    }
+
 }
