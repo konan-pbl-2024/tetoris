@@ -11,7 +11,14 @@
         android:id="@+id/full_screen_touch_area"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/kinnmirai" /> <!-- 背景を設定 -->
+        android:background="@drawable/kinnmirai" >
+
+        <Button
+            android:id="@+id/op_button"
+            android:layout_width="142dp"
+            android:layout_height="125dp"
+            android:text="操作説明" />
+    </FrameLayout> <!-- 背景を設定 -->
 
     <!-- TextViewをFrameLayoutの上に重ねる -->
     <TextView

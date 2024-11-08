@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        android:gravity="center_vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ボタンごとの役割説明。"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp"/>
+
+
+        <Button
+            android:id="@+id/lrOp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Left Right" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ボタンを1回押すと方向に合わせて、１ブロック移動。長押しすることで素早い移動も可能。"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp"/>
+
+
+        <Button
+            android:id="@+id/lrRoOp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Left Right Rotate" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:text="ボタン方向にしたがって、ミノの向き変更が可能"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/HoOp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Hold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ボタンを押すことでミノを保持、保持した状態でボタンを押すと保持したミノを使用可能に"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp"/>
+
+        <Button
+            android:id="@+id/FDOp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Fast Drop" />
+
+        <Button
+            android:id="@+id/HDOp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Hard Drop" />
+        <Button
+            android:id="@+id/st_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="メイン画面へ" />
+
+
+    </LinearLayout>
+</ScrollView>
