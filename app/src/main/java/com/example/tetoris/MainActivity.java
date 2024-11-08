@@ -14,17 +14,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
-        Button startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(new View.OnClickListener() {
+
+        Button opButton = findViewById(R.id.op_button);
+        opButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // GameActivityへの画面遷移
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                // opActivityへの画面遷移
+                Intent intent = new Intent(MainActivity.this, OpActivity.class);
                 startActivity(intent);
             }
         });
-        */
+
         // 画面全体をタップできるエリアを取得
         FrameLayout fullScreenTouchArea = findViewById(R.id.full_screen_touch_area);
 

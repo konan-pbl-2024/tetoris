@@ -29,9 +29,15 @@
             android:exported="true">
             <!-- 必要に応じてインテントフィルタを追加 -->
         </activity>
-        <!-- GameActivity を追加 -->
+        <!-- ResultActivity を追加 -->
         <activity
             android:name=".ResultActivity"
+            android:exported="true">
+            <!-- 必要に応じてインテントフィルタを追加 -->
+        </activity>
+        <!-- OpActivityActivity を追加 -->
+        <activity
+            android:name=".OpActivity"
             android:exported="true">
             <!-- 必要に応じてインテントフィルタを追加 -->
         </activity>
