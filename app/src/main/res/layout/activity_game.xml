@@ -109,27 +109,31 @@
                 android:id="@+id/buttonLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Left" />
+                android:text="Left"
+                style="@style/CustomButton"/>
 
             <!-- 回転ボタン -->
             <Button
                 android:id="@+id/buttonrightRotate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="rightRotate" />
+                android:text="rightRotate"
+                style="@style/CustomButton"/>
 
             <Button
                 android:id="@+id/buttonleftRotate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="leftRotate" />
+                android:text="leftRotate"
+                style="@style/CustomButton"/>
 
             <!-- 右移動ボタン -->
             <Button
                 android:id="@+id/buttonRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Right" />
+                android:text="Right"
+                style="@style/CustomButton"/>
         </LinearLayout>
 
         <!-- Fast DropとHard Dropボタンを横並びにするLinearLayout -->
@@ -145,14 +149,16 @@
                 android:id="@+id/HoldButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hold" />
+                android:text="Hold"
+                style="@style/CustomButton"/>
 
             <!-- Fast Dropボタン -->
             <Button
                 android:id="@+id/fastDropButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fast Drop" />
+                android:text="Fast Drop"
+                style="@style/CustomButton"/>
 
             <!-- Hard Dropボタン -->
             <Button
@@ -160,7 +166,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Hard Drop" />
+                android:text="Hard Drop"
+                style="@style/CustomButton"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

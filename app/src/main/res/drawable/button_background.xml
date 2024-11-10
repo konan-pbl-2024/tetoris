@@ -1,0 +1,21 @@
+<!-- res/drawable/button_background.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#B0BEC5" /> <!-- 押されたときの色 -->
+            <corners android:radius="0dp" /> <!-- 四角形に設定 -->
+            <padding android:left="10dp" android:top="10dp"
+                android:right="10dp" android:bottom="10dp" />
+            <stroke android:width="2dp" android:color="#78909C" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:angle="270" android:startColor="#ECEFF1" android:endColor="#CFD8DC" /> <!-- 通常時の色 -->
+            <corners android:radius="0dp" />
+            <padding android:left="10dp" android:top="10dp"
+                android:right="10dp" android:bottom="10dp" />
+            <stroke android:width="2dp" android:color="#78909C" />
+        </shape>
+    </item>
+</selector>
