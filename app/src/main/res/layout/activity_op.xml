@@ -2,19 +2,20 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+
         android:gravity="center_horizontal"> <!-- 中央寄せに修正 -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ボタンごとの役割説明。"
-            android:textSize="18sp"
+            android:text="    ボタンごとの役割説明"
+            android:textSize="30sp"
             android:textColor="#000000"
             android:paddingBottom="16dp"/>
 
@@ -43,7 +44,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ボタン方向にしたがって、ミノの向き変更が可能"
+            android:text="ボタン方向にしたがって、ミノの向きが９０度ずつ変更が可能"
             android:textColor="#000000"
             android:textSize="18sp"
             android:paddingBottom="16dp"/>
