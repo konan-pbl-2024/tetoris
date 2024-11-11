@@ -155,20 +155,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     //結果表示
-    public void showResultScreen(int score) {
+    public void showResultScreen(int score,int level,int maxcombo) {
         // 結果画面へのインテントを作成し、スコアを渡す
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("SCORE", score);
+        intent.putExtra("Level",level);
+        intent.putExtra("MAXCOMBO",maxcombo);
         startActivity(intent);
     }
-
-    public void showResultScreenlevel(int Level) { //tetrisviewの604行目あたりを変更？
-        // 結果画面へのインテントを作成し、スコアを渡す
-        Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("LEVEL", Level);
-        startActivity(intent);
-    }
-
-
 
 }
