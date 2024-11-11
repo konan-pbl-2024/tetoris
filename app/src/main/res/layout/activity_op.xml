@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-
-        android:gravity="center_vertical">
-
+        android:gravity="center_horizontal"> <!-- 中央寄せに修正 -->
 
         <TextView
             android:layout_width="match_parent"
@@ -19,13 +18,13 @@
             android:textColor="#000000"
             android:paddingBottom="16dp"/>
 
-
         <Button
             android:id="@+id/lrOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Left Right" />
+            android:text="Left Right"
+            android:layout_gravity="center" /> <!-- 中央寄せ -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,28 +33,28 @@
             android:textColor="#000000"
             android:paddingBottom="16dp"/>
 
-
         <Button
             android:id="@+id/lrRoOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Left Right Rotate" />
+            android:text="Left Right Rotate"
+            android:layout_gravity="center" /> <!-- 中央寄せ -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
             android:text="ボタン方向にしたがって、ミノの向き変更が可能"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:paddingBottom="16dp"/>
 
         <Button
             android:id="@+id/HoOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Hold" />
+            android:text="Hold"
+            android:layout_gravity="center" /> <!-- 中央寄せ -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,22 +67,51 @@
             android:id="@+id/FDOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Fast Drop" />
+            android:text="Fast Drop"
+            android:layout_gravity="center" /> <!-- 中央寄せ -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ボタンを押すことでテトリミノを素早く降下。"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp"/>
+
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="462dp"
+            android:layout_height="370dp"
+            android:layout_gravity="center" />
+
+
 
         <Button
             android:id="@+id/HDOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Hard Drop" />
+            android:text="Hard Drop" /> <!-- 中央寄せ -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ボタンを押すことでテトリミノを瞬時に降下。"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp"/>
+
+        <VideoView
+            android:id="@+id/videoView2"
+            android:layout_width="462dp"
+            android:layout_height="370dp"
+            android:layout_gravity="center" />
+
         <Button
             android:id="@+id/st_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="メイン画面へ" />
-
-
     </LinearLayout>
 </ScrollView>
