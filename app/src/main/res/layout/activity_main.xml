@@ -16,8 +16,10 @@
         <Button
             android:id="@+id/op_button"
             android:layout_width="142dp"
-            android:layout_height="125dp"
-            android:text="操作説明" />
+            android:layout_height="99dp"
+            android:text="操作説明"
+
+            android:textSize="20sp" />
     </FrameLayout> <!-- 背景を設定 -->
 
     <!-- TextViewをFrameLayoutの上に重ねる -->
