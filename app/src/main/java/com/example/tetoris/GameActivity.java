@@ -1,6 +1,7 @@
 package com.example.tetoris;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ public class GameActivity extends AppCompatActivity {
     private Button hardDropButton; //ハードドロップボタン
     private Button fastDropButton;
     private Button HoldButton;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
         // 左ボタン
         buttonLeft = findViewById(R.id.buttonLeft);
+        buttonLeft.setSoundEffectsEnabled(false);
         buttonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +49,7 @@ public class GameActivity extends AppCompatActivity {
 
         // 回転ボタン
         buttonrightRotate = findViewById(R.id.buttonrightRotate);
+        buttonrightRotate.setSoundEffectsEnabled(false);
         buttonrightRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +59,7 @@ public class GameActivity extends AppCompatActivity {
 
         // 回転ボタン
         buttonleftRotate = findViewById(R.id.buttonleftRotate);
+        buttonleftRotate.setSoundEffectsEnabled(false);
         buttonleftRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
 
         // 右ボタン
         buttonRight = findViewById(R.id.buttonRight);
+        buttonRight.setSoundEffectsEnabled(false);
         buttonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +100,7 @@ public class GameActivity extends AppCompatActivity {
 
         //hard Dropボタン
         hardDropButton = findViewById(R.id.hardDropButton);
+        hardDropButton.setSoundEffectsEnabled(false);
         hardDropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
 
         //Holdボタン
         HoldButton = findViewById(R.id.HoldButton);
+        HoldButton.setSoundEffectsEnabled(false);
         HoldButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +125,12 @@ public class GameActivity extends AppCompatActivity {
         TetrisView tetrisView = findViewById(R.id.tetrisView);
         tetrisView.setSelectedItem(selectedItem); // アイテムを渡す
 
+
+        // MediaPlayerを初期化し、BGMをセット
+        mediaPlayer = MediaPlayer.create(this, R.raw.game);
+        mediaPlayer.setVolume(0.2f,0.2f);
+        mediaPlayer.setLooping(true); // ループ再生
+        mediaPlayer.start(); // 再生開始
     }
 
     @Override
@@ -169,6 +183,31 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("Level",level);
         intent.putExtra("MAXCOMBO",maxcombo);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause(); // 一時停止
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start(); // 再開
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release(); // リソース解放
+            mediaPlayer = null;
+        }
     }
 
 }
