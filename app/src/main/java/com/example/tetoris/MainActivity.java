@@ -1,10 +1,12 @@
 package com.example.tetoris;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        TextView textView = findViewById(R.id.taptext);
+        ObjectAnimator blinkAnimator = ObjectAnimator.ofFloat(textView, View.ALPHA, 1f, 0f);
+        blinkAnimator.setDuration(500); // 点滅速度
+        blinkAnimator.setRepeatMode(ObjectAnimator.REVERSE);
+        blinkAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+        blinkAnimator.start();
+
         // 画面全体をタップできるエリアを取得
         FrameLayout fullScreenTouchArea = findViewById(R.id.full_screen_touch_area);
 
@@ -33,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 画面遷移（新しいアクティビティを開く）
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                Intent intent = new Intent(MainActivity.this, ItemBox.class);
                 startActivity(intent);
             }
         });

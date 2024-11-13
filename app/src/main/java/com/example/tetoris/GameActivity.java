@@ -110,6 +110,13 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        // Intent からアイテムを受け取る
+        Items selectedItem = (Items) getIntent().getSerializableExtra("selectedItem");
+
+        // TetrisView を取得し、選択されたアイテムを渡す
+        TetrisView tetrisView = findViewById(R.id.tetrisView);
+        tetrisView.setSelectedItem(selectedItem); // アイテムを渡す
+
     }
 
     @Override

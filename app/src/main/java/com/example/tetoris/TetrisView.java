@@ -33,6 +33,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean isHardDropping = false; // ハードドロップ中かどうかのフラグ
     private static final int NEXT_TETROMINOES_COUNT = 5; // 表示する次のミノの数
     private Queue<Tetromino> nextTetrominoes = new LinkedList<>(); // 次のミノのキュー
+    private int scale;//ネクストの大きさ調整
+    private int stand;//ネクストの位置補正
     //ホールドミノ用宣言
     private Tetromino holdMino = null;
     private boolean hasSwapped = false;
@@ -50,6 +52,13 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     private int maxcombo=0;
     //SRS
     private int shapenumber;
+    //アイテム
+    int newScoreMultiplier;
+    int newDropSpeed;
+    private Items selectedItem;  // selectedItem フィールドを追加
+    //T-spin
+    private int movecount=1;
+    private int TSpinBonus;
 
 
     public TetrisView(Context context, AttributeSet attrs) {
@@ -58,6 +67,13 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         paint = new Paint();
         board = new int[NUM_ROWS][NUM_COLUMNS]; // ボードの初期化
+
+        //アイテム系統
+        itemManager = new ItemManager();
+        // アイテムが渡された場合、そのアイテムを適用
+        if (selectedItem != null) {
+            applyItemEffect(selectedItem);
+        }
     }
 
     // 次のレベルまでの点数を設定
@@ -181,22 +197,37 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void drawNextTetrominoes(Canvas canvas) {
-        int nextTetrominoX = 60; // テトリミノを描画するX座標の初期位置
-        int nextTetrominoY = 44; // ボードの下部に表示するためのY座標の初期位置
+        int nextTetrominoX = 820; // テトリミノを描画するX座標の初期位置
+        int nextTetrominoY = 90; // ボードの下部に表示するためのY座標の初期位置
+
         // Iteratorを使って最初の4つのテトリミノを表示する
         Iterator<Tetromino> iterator = nextTetrominoes.iterator();
+
         for (int num = 0; num < 4 && iterator.hasNext(); num++) {
             Tetromino tetromino = iterator.next(); // 次のテトリミノを取得
             paint.setColor(tetromino.color);//色の再設定
             for (int i = 0; i < tetromino.shape.length; i++) {
                 for (int j = 0; j < tetromino.shape[i].length; j++) {
                     if (tetromino.shape[i][j] != 0) {
+
+                        if(num==0){//大きさ調整
+                            scale=6;
+                        }else{
+                            scale=5;
+                        }
+
+                        if(tetromino.color!=Color.rgb(255, 255, 0)&&tetromino.color!=Color.rgb(0, 255, 255)){
+                            stand=25 * (1+num/2);
+                        }else {
+                            stand=10 * (1+num/2);
+                        }
+
                         // 各テトリミノを左から順に描画
                         canvas.drawRect(
-                                nextTetrominoX + j * cellSize * 3 / 4,
-                                nextTetrominoY + i * cellSize * 3 / 4,
-                                nextTetrominoX + (j + 1) * cellSize * 3 / 4,
-                                nextTetrominoY + (i + 1) * cellSize * 3 / 4,
+                                nextTetrominoX + stand + j * cellSize * scale / 8,
+                                nextTetrominoY + stand + i * cellSize * scale / 8,
+                                nextTetrominoX + stand + (j + 1) * cellSize * scale / 8,
+                                nextTetrominoY + stand + (i + 1) * cellSize * scale / 8,
                                 paint);
 
                         // 境界線を描画
@@ -204,10 +235,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
                         paint.setColor(Color.BLACK);
                         paint.setStrokeWidth(5);
                         canvas.drawRect(
-                                nextTetrominoX + j * cellSize * 3 / 4,
-                                nextTetrominoY + i * cellSize * 3 / 4,
-                                nextTetrominoX + (j + 1) * cellSize * 3 / 4,
-                                nextTetrominoY + (i + 1) * cellSize * 3 / 4,
+                                nextTetrominoX +stand + j * cellSize * scale / 8,
+                                nextTetrominoY +stand + i * cellSize * scale / 8,
+                                nextTetrominoX +stand + (j + 1) * cellSize * scale / 8,
+                                nextTetrominoY +stand + (i + 1) * cellSize * scale / 8,
                                 paint);
 
                         // 元の塗りつぶしスタイルに戻す
@@ -218,7 +249,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             }
 
             // 各テトリミノ間にスペースを確保
-            nextTetrominoX += tetromino.shape[0].length * cellSize + 10; // テトリミノ間に10ピクセルのスペースを追加
+            nextTetrominoX -= 200; // テトリミノ間に10ピクセルのスペースを追加
+            nextTetrominoY -= 30;
         }
 
     }
@@ -369,16 +401,16 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     public void moveLeft() {
         if (canMove(currentTetromino.x - 1, currentTetromino.y)) {
             currentTetromino.x--; // 左に移動
+            movecount++;
         }
-
         draw();
     }
 
     public void moveRight() {
         if (canMove(currentTetromino.x + 1, currentTetromino.y)) {
             currentTetromino.x++; // 右に移動
+            movecount++;
         }
-
         draw();
     }
 
@@ -476,15 +508,12 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
         for(int []offset : rotationOffsets){
             currentTetromino.shape = rotatedShape;
-            System.out.println(Arrays.deepToString(rotatedShape));
-            System.out.println(Arrays.deepToString(currentTetromino.shape));
             int newx=currentTetromino.x+offset[0];
             int newy=currentTetromino.y+offset[1];
-            System.out.println(offset[0]+","+offset[1]);
-            System.out.println("X:"+newx+",Y:"+newy);
             if(canMove(newx,newy)){
                 currentTetromino.x=newx;
                 currentTetromino.y=newy;
+                movecount=0;
                 break;
             }else{
                 currentTetromino.shape=originalShape;
@@ -527,15 +556,12 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
         for(int []offset : rotationOffsets){
             currentTetromino.shape = rotatedShape;
-            System.out.println(Arrays.deepToString(rotatedShape));
-            System.out.println(Arrays.deepToString(currentTetromino.shape));
             int newx=currentTetromino.x+offset[0];
             int newy=currentTetromino.y+offset[1];
-            System.out.println(offset[0]+","+offset[1]);
-            System.out.println("X:"+newx+",Y:"+newy);
             if(canMove(newx,newy)){
                 currentTetromino.x=newx;
                 currentTetromino.y=newy;
+                movecount=0;
                 break;
             }else{
                 currentTetromino.shape=originalShape;
@@ -583,6 +609,12 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
         }
+        //T-Spinの判定
+        if(isTSpin(currentTetromino, board) == true){
+            TSpinBonus=4;
+        }else{
+            TSpinBonus=1;
+        }
         clearFullRows(); // 行が揃っているか確認し削除
         currentTetromino = nextTetrominoes.poll();
         generateNextTetrominoes();
@@ -597,6 +629,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         // ファストドロップの状態に応じてfallIntervalを設定
         if (!isFastDropping) {
             fallInterval = FALL_INTERVAL / (1+(4 * level / 10)); // スピード倍率に基づく
+            fallInterval = fallInterval*newDropSpeed/10; // スピード倍率に基づく
         }
 
         if (canMove(currentTetromino.x, currentTetromino.y + 1)) {
@@ -670,7 +703,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
                 row--; // 行を削除したため、再チェック
 
                 if(ALLclear()){//オールクリアでのボーナス
-                    score += 1200 + 1200 * level;
+                    score += (1200 + 1200 * level)*newScoreMultiplier / 10 * 2;//tetris２つ分のスコア
                 }
             }
         }
@@ -684,21 +717,21 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             }
 
             if(rowsCleared == 1){
-                score += 40 + 40 * level;
+                score += (40 + 40 * level)*newScoreMultiplier/10 * TSpinBonus;
             } else if (rowsCleared == 2) {
-                score += 100 + 100 * level;
+                score += (100 + 100 * level)*newScoreMultiplier/10 * TSpinBonus;
             } else if (rowsCleared == 3) {
-                score += 300 + 300 * level;
+                score += (300 + 300 * level)*newScoreMultiplier/10 * TSpinBonus;
             } else if (rowsCleared == 4) {
-                score += 1200 + 1200 * level;
+                score += (1200 + 1200 * level)*newScoreMultiplier/10 * TSpinBonus;
             }
 
             if(3 > rencount){
-                score += 40 * (level + 1) * (rencount - 1);
+                score += (40 * (level + 1) * (rencount - 1))*newScoreMultiplier/10;
             } else if (11 > rencount && rencount >= 3) {
-                score += 40 * (level + 1) * (rencount - 1) * 2;
+                score += (40 * (level + 1) * (rencount - 1) * 2)*newScoreMultiplier/10;
             } else if (rencount >= 11) {
-                score += 20 * (level+1) * (rencount - 1);
+                score += (20 * (level+1) * (rencount - 1))*newScoreMultiplier/10;
             }
 
             System.out.println("score: " + score);
@@ -732,6 +765,64 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     public int getCombo() {
         return maxcombo;
     }
+
+    //アイテム系統
+    private ItemManager itemManager;
+
+    public void setSelectedItem(Items selectedItem) {
+        this.selectedItem = selectedItem;
+        applyItemEffect(selectedItem); // アイテムの効果を適用
+    }
+
+
+    public void applyItemEffect(Items item) {
+        newScoreMultiplier = (int)item.getScoreMultiplier();
+        newDropSpeed = (int)item.getDropSpeedModifier();
+    }
+
+    //Tspinの判定
+    public boolean isTSpin(Tetromino tetromino, int[][] board) {
+        // T型以外の場合はfalseを返す
+        if (tetromino.color!=Color.rgb(128, 0, 128)) {
+            return false;
+        }
+
+        // コーナーの位置を取得（例として、テトリミノの4つの角を基準にする）
+        int cornerCount = 0;
+
+        // 4つのコーナーを確認
+        if(currentTetromino.y==23){
+            cornerCount = 2;
+            if (board[currentTetromino.y][currentTetromino.x] != 0) cornerCount++; // 左上
+            if (board[currentTetromino.y][currentTetromino.x + 2] != 0) cornerCount++; // 右上
+        } else if (currentTetromino.x==13) {
+            cornerCount = 2;
+            if (board[currentTetromino.y][currentTetromino.x] != 0) cornerCount++; // 左上
+            if (board[currentTetromino.y + 2][currentTetromino.x] != 0) cornerCount++; // 左下
+        } else if (currentTetromino.x==4) {
+            cornerCount = 2;
+            if (board[currentTetromino.y][currentTetromino.x + 2] != 0) cornerCount++; // 右上
+            if (board[currentTetromino.y + 2][currentTetromino.x + 2] != 0) cornerCount++; // 右下
+        }else  {
+            if (board[currentTetromino.y][currentTetromino.x] != 0) cornerCount++; // 左上
+            if (board[currentTetromino.y][currentTetromino.x + 2] != 0) cornerCount++; // 右上
+            if (board[currentTetromino.y + 2][currentTetromino.x] != 0) cornerCount++; // 左下
+            if (board[currentTetromino.y + 2][currentTetromino.x + 2] != 0) cornerCount++; // 右下
+        }
+
+
+        System.out.println("TSpin corner:"+cornerCount+",move:"+movecount);
+
+        // 3つ以上のコーナーが埋まっている場合、Tスピンと判定
+        if(cornerCount >= 3&&movecount==0){
+            System.out.println("Tspin");
+            return true;
+        }else{
+            System.out.println("not");
+            return false;
+        }
+    }
+
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
