@@ -41,6 +41,12 @@
             android:exported="true">
             <!-- 必要に応じてインテントフィルタを追加 -->
         </activity>
+        <!-- ItemBox を追加 -->
+        <activity
+            android:name=".ItemBox"
+            android:exported="true">
+            <!-- 必要に応じてインテントフィルタを追加 -->
+        </activity>
     </application>
 
 </manifest>

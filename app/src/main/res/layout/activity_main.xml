@@ -13,21 +13,40 @@
         android:layout_height="match_parent"
         android:background="@drawable/kinnmirai" >
 
+        <!-- TextViewをFrameLayoutの上に重ねる -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:text="tetris"
+            android:textSize="120sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:fontFamily="@font/squareo"/> <!-- 中央に配置 -->
+
+        <!-- TextViewをFrameLayoutの上に重ねる -->
+        <TextView
+            android:id="@+id/taptext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+            android:text="tap the screen"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:fontFamily="@font/square"/> <!-- 中央に配置 -->
+
         <Button
             android:id="@+id/op_button"
             android:layout_width="142dp"
             android:layout_height="99dp"
             android:text="操作説明"
 
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            style="@style/CustomButton"/>
+
     </FrameLayout> <!-- 背景を設定 -->
 
-    <!-- TextViewをFrameLayoutの上に重ねる -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tetris Game"
-        android:textSize="70sp"
-        android:textStyle="bold"
-        android:layout_gravity="center" /> <!-- 中央に配置 -->
 </FrameLayout>
