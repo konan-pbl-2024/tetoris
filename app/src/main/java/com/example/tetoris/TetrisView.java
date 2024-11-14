@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.SoundPool;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -35,6 +36,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     private Queue<Tetromino> nextTetrominoes = new LinkedList<>(); // 次のミノのキュー
     private int scale;//ネクストの大きさ調整
     private int stand;//ネクストの位置補正
+    private int rowsCleared;
     //ホールドミノ用宣言
     private Tetromino holdMino = null;
     private boolean hasSwapped = false;
@@ -59,6 +61,12 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     //T-spin
     private int movecount=1;
     private int TSpinBonus;
+    //SE
+    private SoundPool soundPool;
+    private int levalsound;
+    private int movesound;
+    private int canselsound;
+    private int breaksound;
 
 
     public TetrisView(Context context, AttributeSet attrs) {
@@ -74,6 +82,14 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         if (selectedItem != null) {
             applyItemEffect(selectedItem);
         }
+
+        // SoundPoolの初期化（最大再生数を設定）
+        soundPool = new SoundPool.Builder().setMaxStreams(10).build();
+        // 効果音ファイルをロード（例: R.raw.se_sound に効果音ファイルがあると仮定）
+        levalsound = soundPool.load(context, R.raw.levelup, 1);
+        movesound = soundPool.load(context, R.raw.move, 1);
+        canselsound = soundPool.load(context, R.raw.cansel_fix, 2);
+        breaksound = soundPool.load(context, R.raw.breakline, 1);
     }
 
     // 次のレベルまでの点数を設定
@@ -84,6 +100,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             nextlevel = i;
         }
         if(score >= levelsum * 1800){
+            soundPool.play(levalsound,1.0f,1.0f,1,0,0.8f);
             return nextlevel;
         }else{
             return level;
@@ -400,6 +417,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void moveLeft() {
         if (canMove(currentTetromino.x - 1, currentTetromino.y)) {
+            soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
             currentTetromino.x--; // 左に移動
             movecount++;
         }
@@ -407,6 +425,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void moveRight() {
+        soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
         if (canMove(currentTetromino.x + 1, currentTetromino.y)) {
             currentTetromino.x++; // 右に移動
             movecount++;
@@ -428,6 +447,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void softDrop(){
         if (canMove(currentTetromino.x, currentTetromino.y+1)) {
+            soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
             currentTetromino.y++; // 右に移動
         }
         draw();
@@ -440,6 +460,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             if (isHardDropping) {
                 return; // すでにハードドロップ中の場合は何もしない
             }
+            soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
             isHardDropping = true; // ハードドロップ中に設定
 
             while (canMoveDown(currentTetromino)) {
@@ -467,6 +488,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
                     // ボードの端や他のブロックとの衝突を確認
                     if (newY >= NUM_ROWS || board[newY][tetromino.x + j] != 0) {
+                        soundPool.play(canselsound,1.0f,1.0f,2,0,1.0f);
                         return false; // 衝突する場合、下には移動できない
                     }
                 }
@@ -511,6 +533,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             int newx=currentTetromino.x+offset[0];
             int newy=currentTetromino.y+offset[1];
             if(canMove(newx,newy)){
+                //SE
+                soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
                 currentTetromino.x=newx;
                 currentTetromino.y=newy;
                 movecount=0;
@@ -559,6 +583,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             int newx=currentTetromino.x+offset[0];
             int newy=currentTetromino.y+offset[1];
             if(canMove(newx,newy)){
+                //SE
+                soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
                 currentTetromino.x=newx;
                 currentTetromino.y=newy;
                 movecount=0;
@@ -573,6 +599,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void swapHold() {
         if (hasSwapped) return; // 次のテトリミノが生成されるまで入れ替え禁止
+        //SE
+        soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
 
         if (holdMino == null) {
             // `holdMino`が空なら、現在のテトリミノを保存
@@ -674,7 +702,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
     // 一列が揃っているか確認し、揃った行を削除する
     private void clearFullRows() {
-        int rowsCleared = 0; // 消えた行数をカウントする
+        rowsCleared = 0; // 消えた行数をカウントする
 
         for (int row = 4; row < NUM_ROWS; row++) {
             boolean isFull = true;
@@ -715,6 +743,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             if(maxcombo<rencount){
                 maxcombo=rencount;
             }
+
+            soundPool.play(breaksound,0.4f,0.4f,1,0,1.0f);
+
 
             if(rowsCleared == 1){
                 score += (40 + 40 * level)*newScoreMultiplier/10 * TSpinBonus;
@@ -823,7 +854,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         // 何もしない場合でもメソッドを実装する必要があります。
@@ -832,5 +862,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         handler.removeCallbacksAndMessages(null); // すべてのコールバックを削除
+        // SoundPoolのリソースを解放
+        if (soundPool != null) {
+            soundPool.release();
+            soundPool = null;
+        }
     }
 }

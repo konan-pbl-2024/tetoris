@@ -1,6 +1,7 @@
 package com.example.tetoris;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -13,6 +14,7 @@ import com.example.tetoris.Items;
 public class ItemBox extends AppCompatActivity {
     private ItemManager itemManager;
     private Items selectedItem;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,42 @@ public class ItemBox extends AppCompatActivity {
             selectedItem = itemManager.getItemList().get(4); // Speed Boosterを選択
             startGameWithItem();
         });
+
+        // MediaPlayerを初期化し、BGMをセット
+        mediaPlayer = MediaPlayer.create(this, R.raw.item);
+        mediaPlayer.setVolume(0.2f,0.2f);
+        mediaPlayer.setLooping(true); // ループ再生
+        mediaPlayer.start(); // 再生開始
     }
 
     private void startGameWithItem() {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("selectedItem", selectedItem);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause(); // 一時停止
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start(); // 再開
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release(); // リソース解放
+            mediaPlayer = null;
+        }
     }
 }
