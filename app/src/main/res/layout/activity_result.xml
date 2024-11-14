@@ -13,7 +13,8 @@
         android:layout_marginTop="150dp"
         android:text="Game Over"
         android:textColor="@android:color/white"
-        android:textSize="60sp" />
+        android:textSize="60sp"
+        android:fontFamily="@font/squareo"/>
 
     <!-- Score Display -->
     <TextView
@@ -25,7 +26,8 @@
         android:layout_marginTop="40dp"
         android:text="Score: 0"
         android:textColor="@android:color/white"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:fontFamily="@font/square"/>
 
     <!-- Level Display -->
     <TextView
@@ -37,7 +39,8 @@
         android:layout_marginTop="20dp"
         android:text="Level: 0"
         android:textColor="@android:color/white"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:fontFamily="@font/square"/>
 
     <!-- Max Combo Display -->
     <TextView
@@ -49,7 +52,8 @@
         android:layout_marginTop="20dp"
         android:text="Max Combo: 0"
         android:textColor="@android:color/white"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:fontFamily="@font/square"/>
 
     <!-- Restart Button -->
     <Button

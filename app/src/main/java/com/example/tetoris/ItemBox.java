@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.tetoris.GameActivity;
 import com.example.tetoris.ItemManager;
@@ -28,31 +29,56 @@ public class ItemBox extends AppCompatActivity {
         Button scoreBoosterButton2 = findViewById(R.id.scoreBoosterButton2);
         Button speedBoosterButton = findViewById(R.id.speedBoosterButton);
         Button speedBoosterButton2 = findViewById(R.id.speedBoosterButton2);
+        Button holddisButton = findViewById(R.id.holddisButton);
+        Button obstacleButton = findViewById(R.id.obstacleButton);
+        Button obstacleButton2 = findViewById(R.id.obstacleButton2);
+        Button bossButton = findViewById(R.id.bossButton);
 
         defaultButton.setOnClickListener(v -> {
             selectedItem = itemManager.getItemList().get(0); // Score Boosterを選択
-            startGameWithItem();
+            startGameWithItem(R.drawable.gamebackground);
         });
 
         scoreBoosterButton.setOnClickListener(v -> {
             selectedItem = itemManager.getItemList().get(1); // Score Boosterを選択
-            startGameWithItem();
+            startGameWithItem(R.drawable.gamebackground);
         });
 
         scoreBoosterButton2.setOnClickListener(v -> {
             selectedItem = itemManager.getItemList().get(2); // Score Boosterを選択
-            startGameWithItem();
+            startGameWithItem(R.drawable.scoreb);
         });
 
         speedBoosterButton.setOnClickListener(v -> {
             selectedItem = itemManager.getItemList().get(3); // Speed Boosterを選択
-            startGameWithItem();
+            startGameWithItem(R.drawable.speeda);
         });
 
         speedBoosterButton2.setOnClickListener(v -> {
             selectedItem = itemManager.getItemList().get(4); // Speed Boosterを選択
-            startGameWithItem();
+            startGameWithItem(R.drawable.speedb);
         });
+
+        holddisButton.setOnClickListener(v -> {
+            selectedItem = itemManager.getItemList().get(5); // Speed Boosterを選択
+            startGameWithItem(R.drawable.holddis);
+        });
+
+        obstacleButton.setOnClickListener(v -> {
+            selectedItem = itemManager.getItemList().get(6); // Speed Boosterを選択
+            startGameWithItem(R.drawable.obstaclea);
+        });
+
+        obstacleButton2.setOnClickListener(v -> {
+            selectedItem = itemManager.getItemList().get(7); // Speed Boosterを選択
+            startGameWithItem(R.drawable.obstacle);
+        });
+
+        bossButton.setOnClickListener(v -> {
+            selectedItem = itemManager.getItemList().get(8); // Speed Boosterを選択
+            startGameWithItem(R.drawable.boss);
+        });
+
 
         // MediaPlayerを初期化し、BGMをセット
         mediaPlayer = MediaPlayer.create(this, R.raw.item);
@@ -61,9 +87,10 @@ public class ItemBox extends AppCompatActivity {
         mediaPlayer.start(); // 再生開始
     }
 
-    private void startGameWithItem() {
+    private void startGameWithItem(int backgroundID) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("selectedItem", selectedItem);
+        intent.putExtra("backgroundID", backgroundID);
         startActivity(intent);
     }
 
