@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/opScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp">
@@ -14,10 +15,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="    ボタンごとの役割説明"
-            android:textSize="30sp"
             android:textColor="#000000"
-            android:paddingBottom="16dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/lrOp_button"
@@ -85,8 +86,6 @@
             android:layout_height="370dp"
             android:layout_gravity="center" />
 
-
-
         <Button
             android:id="@+id/HDOp_button"
             android:layout_width="wrap_content"
@@ -97,10 +96,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="ボタンを押すことでテトリミノを瞬時に降下。"
-            android:textSize="18sp"
             android:textColor="#000000"
-            android:paddingBottom="16dp"/>
+            android:textSize="18sp" />
 
         <VideoView
             android:id="@+id/videoView2"

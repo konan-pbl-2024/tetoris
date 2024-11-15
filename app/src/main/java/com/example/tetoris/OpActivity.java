@@ -13,23 +13,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class OpActivity extends AppCompatActivity {
 
+    private MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_op);
+        ScrollView scrollView=findViewById(R.id.opScrollView);
 
 
 
         Button stButton = findViewById(R.id.st_button);
 
         VideoView videoView = findViewById(R.id.videoView);
+        VideoView videoView2 = findViewById(R.id.videoView2);
 
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.scrollTo(0,0);
+            }
+        });
 
-        //
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sample3);
+        //動画持ってくる
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fastdop);
+        Uri videoUri2 = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.harddop);
 
         // VideoViewに動画をセット
         videoView.setVideoURI(videoUri);
+
+        videoView2.setVideoURI(videoUri2);
 
         // 動画の再生
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -41,6 +53,17 @@ public class OpActivity extends AppCompatActivity {
         });
 
         videoView.start();
+        videoView2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp2) {
+                // 動画が終了したら再度再生を開始
+                videoView2.start();
+            }
+        });
+
+        videoView2.start();
+
+
 
 
 
@@ -54,5 +77,7 @@ public class OpActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
