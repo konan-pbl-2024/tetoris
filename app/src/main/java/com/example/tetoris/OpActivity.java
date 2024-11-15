@@ -26,6 +26,7 @@ public class OpActivity extends AppCompatActivity {
 
         VideoView videoView = findViewById(R.id.videoView);
         VideoView videoView2 = findViewById(R.id.videoView2);
+        VideoView videoView3 = findViewById(R.id.videoView3);
 
         scrollView.post(new Runnable() {
             @Override
@@ -38,6 +39,7 @@ public class OpActivity extends AppCompatActivity {
         //動画持ってくる
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fastdop);
         Uri videoUri2 = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.harddop);
+        Uri videoUri3 = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.demo);
 
         
 
@@ -45,6 +47,7 @@ public class OpActivity extends AppCompatActivity {
         videoView.setVideoURI(videoUri);
 
         videoView2.setVideoURI(videoUri2);
+        videoView3.setVideoURI(videoUri3);
 
         // 動画の再生
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -65,6 +68,15 @@ public class OpActivity extends AppCompatActivity {
         });
 
         videoView2.start();
+        videoView3.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp2) {
+                // 動画が終了したら再度再生を開始
+                videoView3.start();
+            }
+        });
+
+        videoView3.start();
 
 
 
