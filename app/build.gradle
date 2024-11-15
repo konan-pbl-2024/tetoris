@@ -15,9 +15,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
-            cmake {
-                cppFlags ''
-            }
+
         }
     }
 
@@ -35,10 +33,7 @@ android {
         viewBinding true
     }
     externalNativeBuild {
-        cmake {
-            path file('src/main/cpp/CMakeLists.txt')
-            version '3.22.1'
-        }
+        
     }
 }
 
