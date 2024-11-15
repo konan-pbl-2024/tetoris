@@ -7,8 +7,10 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class GameActivity extends AppCompatActivity {
     private TetrisView tetrisView;
@@ -23,11 +25,14 @@ public class GameActivity extends AppCompatActivity {
     private Button fastDropButton;
     private Button HoldButton;
     private MediaPlayer mediaPlayer;
+    private ConstraintLayout gameLayout; // 背景を変更するためのレイアウト
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        gameLayout = findViewById(R.id.gameLayout); // レイアウトを取得
+
         tetrisView = findViewById(R.id.tetrisView);
         scoreTextView = findViewById(R.id.scoreTextView);
         levelTextView = findViewById(R.id.levelTextView);
@@ -120,6 +125,9 @@ public class GameActivity extends AppCompatActivity {
 
         // Intent からアイテムを受け取る
         Items selectedItem = (Items) getIntent().getSerializableExtra("selectedItem");
+        int backgroundID = getIntent().getIntExtra("backgroundID", R.drawable.gameover); // デフォルト背景を指定
+        // 背景を変更
+        gameLayout.setBackgroundResource(backgroundID);
 
         // TetrisView を取得し、選択されたアイテムを渡す
         TetrisView tetrisView = findViewById(R.id.tetrisView);

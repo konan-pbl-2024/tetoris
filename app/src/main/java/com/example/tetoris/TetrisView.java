@@ -57,7 +57,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     //アイテム
     int newScoreMultiplier;
     int newDropSpeed;
+    boolean holddis;
+    boolean obstacle;
     private Items selectedItem;  // selectedItem フィールドを追加
+    private int fixcount=0;
     //T-spin
     private int movecount=1;
     private int TSpinBonus;
@@ -179,6 +182,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         for (int j = 5; j <= NUM_ROWS; j++) {
             canvas.drawLine(cellSize * 5, j * cellSize, cellSize * NUM_COLUMNS, j * cellSize, paint);
         }
+        paint.setColor(Color.RED); // グリッド線の色を設定
+        canvas.drawLine(cellSize * 5, 5 * cellSize, cellSize * NUM_COLUMNS, 5 * cellSize, paint);
 
         // ボードの固定されたセルを描画
         for (int i = 0; i < NUM_ROWS; i++) {
@@ -207,6 +212,40 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
                     // 塗りつぶしスタイルに戻す
                     paint.setStyle(Paint.Style.FILL);
                     paint.setColor(board[i][j]);
+                }
+            }
+        }
+
+    }
+
+    public void addrows(Canvas canvas) {
+         // ボードに追加されたセルを描画
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLUMNS; j++) {
+                if (board[i][j] == 2) {
+                    // 塗りつぶし部分
+                    paint.setColor(Color.WHITE); // 固定された色を設定
+                    canvas.drawRect(
+                            j * cellSize,
+                            i * cellSize,
+                            (j + 1) * cellSize,
+                            (i + 1) * cellSize,
+                            paint);
+
+                    // 境界線部分
+                    paint.setStyle(Paint.Style.STROKE);
+                    paint.setColor(Color.BLACK); // 境界線の色を黒に設定
+                    paint.setStrokeWidth(5);
+                    canvas.drawRect(
+                            j * cellSize,
+                            i * cellSize,
+                            (j + 1) * cellSize,
+                            (i + 1) * cellSize,
+                            paint);
+
+                    // 塗りつぶしスタイルに戻す
+                    paint.setStyle(Paint.Style.FILL);
+                    paint.setColor(Color.WHITE);
                 }
             }
         }
@@ -373,6 +412,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
                 // グリッドの描画
                 drawGrid(canvas);
+
+                //お邪魔ミノの描画
+                addrows(canvas);
 
                 //ゴーストの表示
                 drawGhostTetromino(canvas);
@@ -598,9 +640,11 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void swapHold() {
+        if(holddis) return;//holddisが機能する場合hold不可
         if (hasSwapped) return; // 次のテトリミノが生成されるまで入れ替え禁止
         //SE
         soundPool.play(movesound,1.0f,1.0f,1,0,1.0f);
+
 
         if (holdMino == null) {
             // `holdMino`が空なら、現在のテトリミノを保存
@@ -630,6 +674,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
     // テトリミノを固定する処理を追加
     private void fixTetromino() {
+
+        if(obstacle) fixcount++;
+
         for (int i = 0; i < currentTetromino.shape.length; i++) {
             for (int j = 0; j < currentTetromino.shape[i].length; j++) {
                 if (currentTetromino.shape[i][j] != 0) {
@@ -644,6 +691,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             TSpinBonus=1;
         }
         clearFullRows(); // 行が揃っているか確認し削除
+        if(fixcount == 14){
+        addGarbageRows();
+        }
         currentTetromino = nextTetrominoes.poll();
         generateNextTetrominoes();
         hasSwapped = false; // 新しいテトリミノ生成でholdminoのフラグリセット
@@ -809,6 +859,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     public void applyItemEffect(Items item) {
         newScoreMultiplier = (int)item.getScoreMultiplier();
         newDropSpeed = (int)item.getDropSpeedModifier();
+        holddis = item.isHoldDisabled();
+        obstacle = item.isGenerateObstacle();
     }
 
     //Tspinの判定
@@ -852,6 +904,43 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
             System.out.println("not");
             return false;
         }
+    }
+
+    // 4行のお邪魔ミノを最下部に追加するメソッド
+    public void addGarbageRows() {
+        int NUM_COLUMNS = board[0].length; // 列数の取得
+        int NUM_ROWS = board.length; // 行数の取得
+
+        int randomadd = (int)(Math.random() * 3) + 1;
+
+        // 上から4行分を下にシフト
+        for (int r = 0; r < NUM_ROWS - randomadd; r++) {
+            for (int c = 0; c < NUM_COLUMNS; c++) {
+                board[r][c] = board[r + randomadd][c];
+            }
+        }
+
+        // 最下部の4行にランダムなお邪魔ミノを配置
+        for (int r = NUM_ROWS - randomadd; r < NUM_ROWS; r++) {
+            int randomInt = (int)(Math.random() * 10) + 1 + 4;
+            for (int c = NUM_COLUMNS - 10; c < NUM_COLUMNS; c++) {
+
+                if(randomInt==5){
+                    randomInt = 7;
+                }else if(randomInt == 15){
+                    randomInt = 8;
+                }
+
+                if(c != randomInt){
+                    board[r][c] = 2;
+                }else{
+                    board[r][c] = 0;
+                }
+
+            }
+        }
+
+        fixcount=0;
     }
 
     @Override

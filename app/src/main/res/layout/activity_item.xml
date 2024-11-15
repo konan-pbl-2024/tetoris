@@ -15,7 +15,7 @@
             android:id="@+id/frame1"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@drawable/z"
+            android:background="@drawable/gamebackground"
             app:layout_constraintBottom_toBottomOf="@+id/frame2"
             app:layout_constraintEnd_toStartOf="@id/frame2"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -43,7 +43,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/s"
+            android:background="@drawable/scoreb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/frame1"
             app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +71,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/j"
+            android:background="@drawable/speeda"
             app:layout_constraintEnd_toStartOf="@id/frame4"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +100,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/l"
+            android:background="@drawable/speedb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/frame3"
             app:layout_constraintTop_toBottomOf="@id/frame2" />
@@ -124,7 +124,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/t"
+            android:background="@drawable/holddis"
             app:layout_constraintEnd_toStartOf="@id/frame6"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +152,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/o"
+            android:background="@drawable/obstaclea"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/frame5"
             app:layout_constraintTop_toBottomOf="@id/frame4" />
@@ -176,7 +176,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/i"
+            android:background="@drawable/obstacle"
             app:layout_constraintEnd_toStartOf="@id/frame8"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
@@ -202,7 +202,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/gameover"
+            android:background="@drawable/boss"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/frame7"
             app:layout_constraintTop_toBottomOf="@id/frame6" />
@@ -220,28 +220,32 @@
             app:layout_constraintTop_toBottomOf="@+id/frame8"
             android:textColor="#D3D3D3"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="selct item"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp"
-            android:fontFamily="@font/square"
-            android:textColor="#D3D3D3"/>
-
 
         <!-- ボタン群 -->
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="290dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/square"
+            android:text="selct stage"
+            android:textColor="#D3D3D3"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.808"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/defaultButton"
             style="@style/CustomButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="148dp"
+            android:layout_height="65dp"
             android:layout_marginBottom="40dp"
-            android:text="Default"
+            android:fontFamily="@font/square"
+            android:text="play normal"
             app:layout_constraintBottom_toTopOf="@+id/frame1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -255,11 +259,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="280dp"
-            android:text="Score Booster"
+            android:text="play this stage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.104"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/defaultButton" />
+            app:layout_constraintTop_toBottomOf="@id/defaultButton"
+            android:fontFamily="@font/square"/>
 
         <Button
             android:id="@+id/scoreBoosterButton2"
@@ -267,11 +272,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="280dp"
-            android:text="Score Booster 2"
+            android:text="play this stage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toEndOf="@+id/scoreBoosterButton"
-            app:layout_constraintTop_toBottomOf="@+id/defaultButton" />
+            app:layout_constraintTop_toBottomOf="@+id/defaultButton"
+            android:fontFamily="@font/square"/>
 
         <Button
             android:id="@+id/speedBoosterButton"
@@ -279,11 +285,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="300dp"
-            android:text="Speed Booster"
+            android:text="play this stage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scoreBoosterButton2" />
+            app:layout_constraintTop_toBottomOf="@id/scoreBoosterButton2"
+            android:fontFamily="@font/square"/>
 
         <Button
             android:id="@+id/speedBoosterButton2"
@@ -291,11 +298,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="300dp"
-            android:text="Speed Booster 2"
+            android:text="play this stage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.569"
             app:layout_constraintStart_toEndOf="@+id/speedBoosterButton"
-            app:layout_constraintTop_toBottomOf="@+id/scoreBoosterButton" />
+            app:layout_constraintTop_toBottomOf="@+id/scoreBoosterButton"
+            android:fontFamily="@font/square"/>
+
+
+        <Button
+            android:id="@+id/holddisButton"
+            style="@style/CustomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="304dp"
+            android:text="play this stage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.112"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/speedBoosterButton2"
+            android:fontFamily="@font/square"/>
+
+
+        <Button
+            android:id="@+id/obstacleButton"
+            style="@style/CustomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="304dp"
+            android:text="play this stage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/holddisButton"
+            app:layout_constraintTop_toBottomOf="@+id/speedBoosterButton"
+            android:fontFamily="@font/square"/>
+
+
+        <Button
+            android:id="@+id/obstacleButton2"
+            style="@style/CustomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:text="play this stage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.112"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/obstacleButton"
+            android:fontFamily="@font/square"/>
+
+        <Button
+            android:id="@+id/bossButton"
+            style="@style/CustomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="300dp"
+            android:text="play this stage"
+            app:layout_constraintStart_toEndOf="@+id/obstacleButton2"
+            app:layout_constraintTop_toBottomOf="@+id/holddisButton"
+            android:fontFamily="@font/square"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
