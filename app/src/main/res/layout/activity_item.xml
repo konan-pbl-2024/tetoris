@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/frame1"
             app:layout_constraintVertical_bias="0.015"
             android:fontFamily="@font/dot"
-            android:textColor="#D3D3D3"/>
+            android:textColor="#4B4B4B"/>
 
         <View
             android:id="@+id/frame2"
@@ -64,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/frame2"
             app:layout_constraintVertical_bias="0.034"
             android:fontFamily="@font/dot"
-            android:textColor="#D3D3D3"/>
+            android:textColor="#4B4B4B"/>
 
         <View
             android:id="@+id/frame3"
@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/frame3"
             app:layout_constraintVertical_bias="0.712"
             android:fontFamily="@font/dot"
-            android:textColor="#D3D3D3"/>
+            android:textColor="#4B4B4B"/>
 
         <View
             android:id="@+id/frame4"
@@ -117,7 +117,7 @@
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/frame4"
             android:fontFamily="@font/dot"
-            android:textColor="#D3D3D3"/>
+            android:textColor="#4B4B4B"/>
 
         <View
             android:id="@+id/frame5"
@@ -145,7 +145,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frame5"
             android:fontFamily="@font/dot"
-            android:textColor="#D3D3D3"/>
+            android:textColor="#4B4B4B"/>
 
         <View
             android:id="@+id/frame6"
@@ -169,7 +169,7 @@
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/frame6"
             android:fontFamily="@font/dot"
-            android:textColor="#D3D3D3"/>
+            android:textColor="#4B4B4B"/>
 
         <View
             android:id="@+id/frame7"
@@ -195,7 +195,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frame7"
             android:fontFamily="@font/dot"
-            android:textColor="#D3D3D3"/>
+            android:textColor="#4B4B4B"/>
 
         <View
             android:id="@+id/frame8"
@@ -218,7 +218,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/frame8"
-            android:textColor="#D3D3D3"
+            android:textColor="#8B0000"
             android:fontFamily="@font/dot"/>
 
 
