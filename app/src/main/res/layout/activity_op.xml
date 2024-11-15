@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp">
@@ -7,85 +8,83 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:gravity="center_horizontal"
 
-        android:gravity="center_horizontal"> <!-- 中央寄せに修正 -->
+        android:orientation="vertical"> <!-- 中央寄せに修正 -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="    ボタンごとの役割説明"
-            android:textSize="30sp"
             android:textColor="#000000"
-            android:paddingBottom="16dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/lrOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Left Right"
-            android:layout_gravity="center" /> <!-- 中央寄せ -->
+            android:layout_gravity="center"
+            android:text="Left Right" /> <!-- 中央寄せ -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="ボタンを1回押すと方向に合わせて、１ブロック移動。長押しすることで素早い移動も可能。"
-            android:textSize="18sp"
             android:textColor="#000000"
-            android:paddingBottom="16dp"/>
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/lrRoOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Left Right Rotate"
-            android:layout_gravity="center" /> <!-- 中央寄せ -->
+            android:layout_gravity="center"
+            android:text="Left Right Rotate" /> <!-- 中央寄せ -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="ボタン方向にしたがって、ミノの向きが９０度ずつ変更が可能"
             android:textColor="#000000"
-            android:textSize="18sp"
-            android:paddingBottom="16dp"/>
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/HoOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hold"
-            android:layout_gravity="center" /> <!-- 中央寄せ -->
+            android:layout_gravity="center"
+            android:text="Hold" /> <!-- 中央寄せ -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="ボタンを押すことでミノを保持、保持した状態でボタンを押すと保持したミノを使用可能に"
-            android:textSize="18sp"
             android:textColor="#000000"
-            android:paddingBottom="16dp"/>
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/FDOp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fast Drop"
-            android:layout_gravity="center" /> <!-- 中央寄せ -->
+            android:layout_gravity="center"
+            android:text="Fast Drop" /> <!-- 中央寄せ -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="ボタンを押すことでテトリミノを素早く降下。"
-            android:textSize="18sp"
             android:textColor="#000000"
-            android:paddingBottom="16dp"/>
-
+            android:textSize="18sp" />
 
         <VideoView
             android:id="@+id/videoView"
             android:layout_width="462dp"
             android:layout_height="370dp"
             android:layout_gravity="center" />
-
-
 
         <Button
             android:id="@+id/HDOp_button"
@@ -97,10 +96,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="ボタンを押すことでテトリミノを瞬時に降下。"
-            android:textSize="18sp"
             android:textColor="#000000"
-            android:paddingBottom="16dp"/>
+            android:textSize="18sp" />
 
         <VideoView
             android:id="@+id/videoView2"
@@ -114,5 +113,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="メイン画面へ" />
+
     </LinearLayout>
 </ScrollView>

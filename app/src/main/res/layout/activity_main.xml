@@ -27,6 +27,19 @@
 
         <!-- TextViewをFrameLayoutの上に重ねる -->
         <TextView
+            android:id="@+id/highScoreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="High Score : 0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:fontFamily="@font/square"/> <!-- 中央に配置 -->
+
+        <!-- TextViewをFrameLayoutの上に重ねる -->
+        <TextView
             android:id="@+id/taptext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

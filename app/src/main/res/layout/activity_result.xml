@@ -16,14 +16,26 @@
         android:textSize="60sp"
         android:fontFamily="@font/squareo"/>
 
+    <!-- "New Record" Text -->
+    <TextView
+        android:id="@+id/new_record_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_over_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/square"
+        android:text="New Record"
+        android:textSize="30sp" />
+
     <!-- Score Display -->
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/game_over_text"
+        android:layout_below="@id/new_record_text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Score: 0"
         android:textColor="@android:color/white"
         android:textSize="40sp"
@@ -66,4 +78,5 @@
         android:text="Restart"
         android:textSize="20sp"
         style="@style/CustomButton"/>
+
 </RelativeLayout>

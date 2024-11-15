@@ -1,11 +1,14 @@
 package com.example.tetoris;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.SharedPreferences;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -22,6 +25,30 @@ public class ResultActivity extends AppCompatActivity {
         // スコアを表示する処理を追加
         TextView scoreTextView = findViewById(R.id.scoreTextView);
         scoreTextView.setText("Score: " + score);
+
+        // ハイスコアを受け取る
+        SharedPreferences sharedPreferences = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+        int highScore = sharedPreferences.getInt("HIGH_SCORE", 0);
+
+        // ハイスコアの更新
+        if (score > highScore) {
+
+            TextView textView = findViewById(R.id.new_record_text);
+            textView.setTextColor(Color.YELLOW);
+            ObjectAnimator blinkAnimator = ObjectAnimator.ofFloat(textView, View.ALPHA, 1f, 0f);
+            blinkAnimator.setDuration(500); // 点滅速度
+            blinkAnimator.setRepeatMode(ObjectAnimator.REVERSE);
+            blinkAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+            blinkAnimator.start();
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("HIGH_SCORE", score);
+            editor.apply();
+
+        } else {
+            TextView textView = findViewById(R.id.new_record_text);
+            textView.setTextColor(Color.TRANSPARENT); // 更新しないときは不可視に
+        }
 
         // レベルを表示する処理を追加
         TextView LevelTextView = findViewById(R.id.LevelTextView);
@@ -43,5 +70,4 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
     }
-
 }

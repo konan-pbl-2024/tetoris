@@ -2,6 +2,7 @@ package com.example.tetoris;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // ハイスコアを表示
+        TextView highScoreLabel = findViewById(R.id.highScoreLabel);
+        SharedPreferences sharedPreferences = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+        int highScore = sharedPreferences.getInt("HIGH_SCORE", 0);
+        highScoreLabel.setText("High Score : " + highScore);
 
         TextView textView = findViewById(R.id.taptext);
         ObjectAnimator blinkAnimator = ObjectAnimator.ofFloat(textView, View.ALPHA, 1f, 0f);
