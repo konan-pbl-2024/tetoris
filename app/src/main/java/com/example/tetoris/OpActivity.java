@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +25,7 @@ public class OpActivity extends AppCompatActivity {
 
 
         //
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sample3);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.samplemovie);
 
         // VideoViewに動画をセット
         videoView.setVideoURI(videoUri);
