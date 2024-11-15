@@ -70,6 +70,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     private int movesound;
     private int canselsound;
     private int breaksound;
+    //お邪魔ミノ
+    private int randomfix=10;
 
 
     public TetrisView(Context context, AttributeSet attrs) {
@@ -684,16 +686,21 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
         }
+
         //T-Spinの判定
         if(isTSpin(currentTetromino, board) == true){
             TSpinBonus=4;
         }else{
             TSpinBonus=1;
         }
+
         clearFullRows(); // 行が揃っているか確認し削除
-        if(fixcount == 14){
+
+        //お邪魔ミノの追加を判定
+        if(fixcount == randomfix){
         addGarbageRows();
         }
+
         currentTetromino = nextTetrominoes.poll();
         generateNextTetrominoes();
         hasSwapped = false; // 新しいテトリミノ生成でholdminoのフラグリセット
@@ -941,6 +948,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         fixcount=0;
+        randomfix = (int)(Math.random() * 8) + 7;
+
     }
 
     @Override
