@@ -34,9 +34,12 @@ public class OpActivity extends AppCompatActivity {
             }
         });
 
+
         //動画持ってくる
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fastdop);
         Uri videoUri2 = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.harddop);
+
+        
 
         // VideoViewに動画をセット
         videoView.setVideoURI(videoUri);
