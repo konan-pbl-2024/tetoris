@@ -66,12 +66,12 @@ public class ItemBox extends AppCompatActivity {
 
         obstacleButton.setOnClickListener(v -> {
             selectedItem = itemManager.getItemList().get(6); // Speed Boosterを選択
-            startGameWithItem(R.drawable.obstaclea);
+            startGameWithItem(R.drawable.obstacle1);
         });
 
         obstacleButton2.setOnClickListener(v -> {
             selectedItem = itemManager.getItemList().get(7); // Speed Boosterを選択
-            startGameWithItem(R.drawable.obstacle);
+            startGameWithItem(R.drawable.obstcle2);
         });
 
         bossButton.setOnClickListener(v -> {

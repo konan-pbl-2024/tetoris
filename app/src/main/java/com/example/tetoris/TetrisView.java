@@ -72,6 +72,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     private int breaksound;
     //お邪魔ミノ
     private int randomfix=10;
+    private int randomplus;
+    private int randommin;
 
 
     public TetrisView(Context context, AttributeSet attrs) {
@@ -918,7 +920,18 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         int NUM_COLUMNS = board[0].length; // 列数の取得
         int NUM_ROWS = board.length; // 行数の取得
 
-        int randomadd = (int)(Math.random() * 3) + 1;
+        if(newScoreMultiplier == 15){
+            randomplus=2;
+            randommin=1;
+        } else if (newScoreMultiplier == 25) {
+            randomplus=4;
+            randommin=1;
+        }else{
+            randomplus=4;
+            randommin=2;
+        }
+
+        int randomadd = (int)(Math.random() * randomplus) + randommin;
 
         // 上から4行分を下にシフト
         for (int r = 0; r < NUM_ROWS - randomadd; r++) {
@@ -948,7 +961,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         fixcount=0;
-        randomfix = (int)(Math.random() * 8) + 7;
+        randomfix = (int)(Math.random() * 4) + 7;
 
     }
 
