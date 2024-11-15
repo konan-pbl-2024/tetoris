@@ -1,6 +1,7 @@
 package com.example.tetoris;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -128,6 +129,11 @@ public class GameActivity extends AppCompatActivity {
         int backgroundID = getIntent().getIntExtra("backgroundID", R.drawable.gameover); // デフォルト背景を指定
         // 背景を変更
         gameLayout.setBackgroundResource(backgroundID);
+
+        //ボタン表記の変更
+        if(selectedItem.isHoldDisabled()){
+            HoldButton.setBackgroundColor(Color.RED);
+        }
 
         // TetrisView を取得し、選択されたアイテムを渡す
         TetrisView tetrisView = findViewById(R.id.tetrisView);
